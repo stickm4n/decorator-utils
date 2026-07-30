@@ -1,0 +1,117 @@
+# Index & Resolution
+index-url = 'https://pypi.org/simple'
+extra-index-url = []
+index-strategy = 'first-index'
+find-links = []
+resolution = 'highest'
+prerelease = 'if-necessary'
+fork-strategy = 'requires-python'
+
+# Build & Installation
+no-build = false
+no-binary = false
+compile-bytecode = true
+link-mode = 'hardlink'
+#:null=#cores: concurrent-builds = inf
+concurrent-downloads = 100
+#:null=#cores: concurrent-installs = inf
+
+# Performance & Caching
+cache-dir = '.uv_cache'
+cache-keys = [{ file = 'pyproject.toml' }]
+no-cache = false
+
+# Network & Security
+allow-insecure-host = []
+keyring-provider = 'subprocess'
+#:deprecated: native-tls = false
+#:null: http-proxy = ''
+#:null: https-proxy = ''
+#:null: no-proxy = []
+
+# Python & Version Management
+python-preference = 'managed'
+python-downloads = 'automatic'
+required-version = '~=0.12.0'
+#:null: python-downloads-json-url = '.uv_cache/python_downloads.json'
+#:null: python-install-mirror = 'https://github.com/astral-sh/python-build-standalone'
+
+# Advanced Options
+add-bounds = 'minor'
+config-settings = { }
+config-settings-package = { }
+dependency-metadata = []
+#:null: exclude-newer = '0000-00-00T00:00:00Z'
+exclude-newer-package = { }
+extra-build-dependencies = { }
+extra-build-variables = { }
+offline = false
+preview = false
+reinstall = false
+reinstall-package = []
+trusted-publishing = 'automatic'
+upgrade = false
+upgrade-package = []
+
+
+[pip]
+all-extras = false
+allow-empty-requirements = true
+annotation-style = 'split'
+break-system-packages = false
+compile-bytecode = true
+config-settings = { }
+config-settings-package = { }
+#:null: custom-compile-command = ''
+dependency-metadata = []
+emit-build-options = false
+emit-find-links = false
+emit-index-annotation = false
+emit-index-url = false
+emit-marker-expression = false
+#:null: exclude-newer = '0000-00-00T00:00:00Z'
+exclude-newer-package = { }
+extra = []
+extra-build-dependencies = { }
+extra-build-variables = { }
+extra-index-url = []
+find-links = []
+fork-strategy = 'requires-python'
+generate-hashes = true
+group = []
+index-strategy = 'first-index'
+index-url = 'https://pypi.org/simple'
+keyring-provider = 'subprocess'
+link-mode = 'hardlink'
+no-annotate = false
+no-binary = []
+no-build = false
+no-build-isolation = false
+no-build-isolation-package = []
+no-deps = false
+no-emit-package = []
+no-extra = []
+no-header = false
+no-index = false
+no-sources = false
+no-strip-extras = false
+no-strip-markers = false
+only-binary = []
+output-file = 'requirements.txt'
+#:null: prefix = '.venv'
+prerelease = 'if-necessary'
+#:null: python = 'python3.12'
+#:null: python-platform = ''
+python-version = '3.10'
+reinstall = false
+reinstall-package = []
+require-hashes = false
+resolution = 'highest'
+strict = true
+system = false
+#:null: target = '.venv/site-packages'
+torch-backend = 'auto'
+universal = false
+upgrade = false
+upgrade-package = []
+verify-hashes = true

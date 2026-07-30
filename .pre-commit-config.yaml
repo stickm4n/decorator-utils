@@ -1,22 +1,38 @@
+minimum_pre_commit_version: 4.6.1
+
+fail_fast: false
+files: ''
+exclude: ^$
+
+default_install_hook_types:
+  - pre-commit
+  - post-checkout
+  - post-merge
+  - post-rewrite
+
 repos:
-  -   repo: https://github.com/PyCQA/autoflake
-      rev: v2.2.1
-      hooks:
-      -   id: autoflake
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.12.0
     hooks:
-      - id: isort
-        name: isort
+      - id: uv-lock
+      - id: uv-export
+      - id: uv-sync
+        args: ["--all-groups"]
+        stages: [post-checkout, post-merge, post-rewrite]
+      # - id: pip-compile
+      #   name: pip-compile requirements.in
+      #   args: [ requirements.in, -o, requirements.txt ]
 
-  - repo: https://github.com/hhatto/autopep8
-    rev: v2.0.4
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.0
     hooks:
-      - id: autopep8
-        name: autopep
+      - id: ruff-check
+        args: [ --fix ]
+      - id: ruff-format
 
-      - id: autopep8
-        name: autopep aggressive
-        args:
-          - --aggressive
+  - repo: https://github.com/facebook/pyrefly-pre-commit
+    rev: 1.1.1
+    hooks:
+      - id: pyrefly-check
+        pass_filenames: false
+        additional_dependencies: [ ]

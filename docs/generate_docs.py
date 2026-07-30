@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 import mkdocs_gen_files
@@ -23,9 +25,8 @@ for path in sorted(root.rglob('decorator_utils/**/*.py')):
 
 for extra_file in ['README.md', 'LICENSE']:
     extra_file_path = root / extra_file
-    with open(extra_file_path, 'r') as readme:
-        content = readme.read()
+    content = extra_file_path.read_text()
 
-        doc_path = extra_file_path.relative_to(root).with_suffix('.md')
-        with mkdocs_gen_files.open(doc_path, 'w') as fd:
-            print(content, file=fd)
+    doc_path = extra_file_path.relative_to(root).with_suffix('.md')
+    with mkdocs_gen_files.open(doc_path, 'w') as fd:
+        print(content, file=fd)

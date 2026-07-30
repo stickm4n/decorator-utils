@@ -1,0 +1,37 @@
+# File Selection & Import Resolution
+project-includes = ['decorator_utils', 'tests']
+project-excludes = []
+disable-project-excludes-heuristics = false
+search-path = ['decorator_utils', 'tests']
+disable-search-path-heuristics = false
+site-package-path = ['.venv/lib/python3.10/site-packages']
+use-ignore-files = true
+
+# Python Environment
+python-platform = 'linux'
+python-version = '3.10'
+#:null: conda-environment = ''
+#:null: python-interpreter-path = ''
+#:null: fallback-python-interpreter-name = 'python3'
+skip-interpreter-query = false
+#:null: typeshed-path = ''
+
+# Type Checking Behavior
+check-unannotated-defs = true
+infer-return-types = 'checked'
+infer-with-first-use = true
+strict-callable-subtyping = true
+permissive-ignores = false
+
+# Import Handling
+replace-imports-with-any = []
+ignore-missing-imports = []
+
+# Error Management
+errors = {}
+preset = 'default'
+disable-type-errors-in-ide = false
+ignore-errors-in-generated-code = false
+
+# Advanced Options
+sub-config = []

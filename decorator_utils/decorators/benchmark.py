@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 from sys import stdout
 from time import perf_counter_ns
-from typing import final
+from typing import Any, final
 
-from ..context import DecoratorContext
-from ..metadata import FunctionMetadata
+from decorator_utils.context import DecoratorContext
+from decorator_utils.metadata import FunctionMetadata
 
 
 @final
@@ -19,16 +21,17 @@ class Benchmark(DecoratorContext):
     :var _stram: Output stream. Defaults to stdout.
     :vartype _stram: SupportsWrite[str]
     """
+
     __time: int
 
     _format: str = 'Function `{}` execution took {:.6f} seconds to finish.'
     _stram = stdout
 
-    def pre_cb(self, *args, **kwargs) -> None:
+    def pre_cb(self, *args: Any, **kwargs: Any) -> None:
         self.__time = perf_counter_ns()
 
-    def post_cb(self, *args, **kwargs) -> None:
-        elapsed_time = (perf_counter_ns() - self.__time) / 1e+9
+    def post_cb(self, *args: Any, **kwargs: Any) -> None:
+        elapsed_time = (perf_counter_ns() - self.__time) / 1e9
         function = FunctionMetadata(self._decorated_function).name
 
         print(self._format.format(function, elapsed_time), file=self._stram)

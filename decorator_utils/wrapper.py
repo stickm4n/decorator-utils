@@ -1,14 +1,24 @@
 from __future__ import annotations
 
 from functools import wraps
-from typing import Any, Callable, NoReturn, Tuple
+from typing import TYPE_CHECKING, Any, NoReturn
 
 from .metadata import FunctionMetadata
 
 
-def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
-                     use_result: bool = True, force_args: bool = True, forward_metadata: bool = False,
-                     return_metadata: bool = False) -> Callable[[...], Any | Tuple[Any, FunctionMetadata]]:
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+
+def function_wrapper(
+    pre_cb: Callable | None = None,
+    post_cb: Callable | None = None,
+    *,
+    use_result: bool = True,
+    force_args: bool = True,
+    forward_metadata: bool = False,
+    return_metadata: bool = False,
+) -> Callable[..., Callable[..., Any | tuple[Any, FunctionMetadata]]]:
     """
     Decorator to wrap a function and execute callbacks before and after its execution.
     Both callback functions take the wrapped function parameters plus a `FunctionMetadata` object instance as
@@ -34,7 +44,7 @@ def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
     :rtype: Callable[[...], Any | Tuple[Any, FunctionMetadata]]
     """
 
-    def __decorator(decorated_function) -> Callable[[...], Any | Tuple[Any, FunctionMetadata]]:
+    def __decorator(decorated_function: Callable) -> Callable[..., Any | tuple[Any, FunctionMetadata]]:
         def __exec_callback(function: Callable, *args, insert_result: Any = NoReturn, **kwargs) -> Any:
             """
             Utility to call functions and handle their supported `args` and `kwargs`.
@@ -42,12 +52,11 @@ def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
             :param function: Callback function.
             :type function: Callable
             :param insert_result: Pass this value as first arg to the function if provided.
-            :type insert_result: Any
+            :type insert_result: Any.
 
             :returns: The wrapped function return value.
             :rtype: Any | Tuple[Any, ...]
             """
-
             if not force_args:
                 metadata = FunctionMetadata(function)
 
@@ -66,7 +75,7 @@ def function_wrapper(pre_cb: Callable = None, post_cb: Callable = None, *,
             return function(*args, **kwargs)
 
         @wraps(decorated_function)
-        def __wrapper(*args, **kwargs) -> Any | Tuple[Any, FunctionMetadata]:
+        def __wrapper(*args, **kwargs) -> Any | tuple[Any, FunctionMetadata]:
             metadata = FunctionMetadata(decorated_function)
 
             if forward_metadata:

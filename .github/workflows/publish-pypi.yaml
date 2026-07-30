@@ -15,15 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup
-        uses: actions/setup-python@v4
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v2
         with:
-          python-version: "3.9"
+          version: "~=0.12.0"
 
       - name: Build
-        run: |
-          python3 -m pip install build --user
-          python3 -m build .
+        run: uv build
 
       - name: Publish
         uses: pypa/gh-action-pypi-publish@release/v1
